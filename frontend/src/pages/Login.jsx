@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { authAPI } from '../utils/api';
+import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,13 +15,7 @@ const Login = () => {
     try {
       setLoading(true);
       
-      const response = await authAPI.login(email, password);
-      
-      // Store user data and token in localStorage
-      localStorage.setItem('user', JSON.stringify({
-        user: response.user,
-        token: response.token
-      }));
+      await login(email, password);
       
       toast.success('Login successful!');
       navigate('/dashboard');
