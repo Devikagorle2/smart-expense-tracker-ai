@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000;
 app.use(helmet());
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ['https://your-domain.com']
+    ? ['https://smart-expense-tracker-ai-ak4y.vercel.app']
     : ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:50063', 'http://127.0.0.1:3000'],
   credentials: true
 }));
